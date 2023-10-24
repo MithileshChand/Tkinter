@@ -84,16 +84,73 @@ Exitprogram.place(x=560, y=130)
 # Function to handle submit button
 
 
+# Counter for generating unique IDs
+id_counter = 1
+
+# Function to handle submit button
+
+
 def submit_data():
-    # Add your logic to handle data submission
-    pass
+    global id_counter
+
+    # Retrieve data from entry boxes
+    full_name = name_entry.get()
+    receipt_number = receipt_entry.get()
+    item_hired = item_entry.get()
+    num_items = num_item_entry.get()
+
+    # Check if all fields are filled
+    if not all([full_name, receipt_number, item_hired, num_items]):
+        messagebox.showerror("Error", "Please fill in all fields.")
+        return
+
+    # Add data to Treeview
+    trv.insert("", "end", values=(id_counter, full_name,
+               receipt_number, item_hired, num_items))
+
+    # Add data to items_data dictionary
+    items_data[id_counter] = {
+        "Full Name": full_name,
+        "Receipt Number": receipt_number,
+        "Item Hired": item_hired,
+        "Number of Items Hired": num_items
+    }
+
+    # Increment the ID counter
+    id_counter += 1
+
+    # Clear entry boxes
+    name_entry.delete(0, tk.END)
+    receipt_entry.delete(0, tk.END)
+    item_entry.delete(0, tk.END)
+    num_item_entry.delete(0, tk.END)
 
 # Function to handle update button
 
 
 def update_data():
-    # Add your logic to handle data update
-    pass
+    # Get the selected item from Treeview
+    selected_item = trv.selection()
+
+    if not selected_item:
+        messagebox.showerror("Error", "Please select a row to update.")
+        return
+
+    # Get the values of the selected item
+    values = trv.item(selected_item, 'values')
+
+    # Fill entry boxes with the selected values
+    name_entry.delete(0, tk.END)
+    name_entry.insert(0, values[1])  # Full Name
+    receipt_entry.delete(0, tk.END)
+    receipt_entry.insert(0, values[2])  # Receipt Number
+    item_entry.delete(0, tk.END)
+    item_entry.insert(0, values[3])  # Item Hired
+    num_item_entry.delete(0, tk.END)
+    num_item_entry.insert(0, values[4])  # Number of Items Hired
+
+    # Remove the selected item from Treeview
+    trv.delete(selected_item)
 
 
 #                      <-------Treeview Box -------->
