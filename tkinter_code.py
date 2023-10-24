@@ -9,14 +9,14 @@ window = tk.Tk()
 window.title("Julie’s Party Hire")
 
 # Geometry of the window
-window.geometry("500x600")
+window.geometry("640x600")
 
 # Defining the Maximum and the minimum size of the window to keep it locked and unchanged (width, height)
-window.minsize(500, 600)
-window.maxsize(500, 600)
+window.minsize(640, 600)
+window.maxsize(640, 600)
 
 # giving the window a background color
-window.config(bg="#FFF1DC")
+window.config(bg="grey")
 
 # Defining Constants
 Max_num_of_items = 500
@@ -40,7 +40,7 @@ def create_label(text, row, column):
 
 
 def create_entry(row, column):
-    entry = tk.Entry(window, border=1, relief="solid", fg="#929090")
+    entry = tk.Entry(window, border=2, relief="solid", fg="#929090")
     entry.grid(row=row, column=column, sticky="w", padx=10, pady=10)
     return entry
 
@@ -71,6 +71,16 @@ update_button = tk.Button(
     window, text="Update", bg="yellow", fg="black", command=lambda: update_data())
 update_button.place(x=320, y=130)
 
+# delete Button
+delete_button = tk.Button(
+    window, text="Delete Row", bg="#FF914D", fg="black", command=exit)
+delete_button.place(x=570, y=170)
+
+# Exitprogram Button
+Exitprogram = tk.Button(
+    window, text="Exit Program", bg="red", fg="black", command=lambda: update_data())
+Exitprogram.place(x=560, y=130)
+
 # Function to handle submit button
 
 
@@ -84,6 +94,36 @@ def submit_data():
 def update_data():
     # Add your logic to handle data update
     pass
+
+
+#                      <-------Treeview Box -------->
+# Create the Treeview with striped lines
+trv = ttk.Treeview(window, columns=(1, 2, 3, 4, 5),
+                   show="headings", height=50, style="mystyle.Treeview")
+trv.place(x=0, y=200)
+
+
+# Input text in the heading
+trv.heading(1, text="ID", anchor="center")  # Treeview Heading of ID
+# Treeview Heading of Full Name
+trv.heading(2, text="Full Name", anchor="center")
+# Treeview Heading of Receipt Number2
+trv.heading(3, text="Receipt Number", anchor="center")
+# Treeview Heading of Item Hired
+trv.heading(4, text="Item Hired", anchor="center")
+# Treeview Heading of Number of Items Hired
+trv.heading(5, text="Number of Items Hired", anchor="center")
+
+# Labeling Treeview Heading in a column for ID
+trv.column("#1", anchor="w", width=40, stretch=True)
+# Labeling Treeview Heading in a column for Name
+trv.column("#2", anchor="w", width=150, stretch=False)
+# Labeling Treeview Heading in a column for Receipt Number
+trv.column("#3", anchor="w", width=150, stretch=False)
+# Labeling Treeview Heading in a column for Item Hired
+trv.column("#4", anchor="w", width=150, stretch=False)
+# Labeling Treeview Heading in a column for Number of items hired
+trv.column("#5", anchor="w", width=150, stretch=False)
 
 
 window.mainloop()
