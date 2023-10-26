@@ -73,13 +73,13 @@ update_button.place(x=320, y=130)
 
 # delete Button
 delete_button = tk.Button(
-    window, text="Delete Row", bg="#FF914D", fg="black", command=exit)
-delete_button.place(x=570, y=170)
+    window, text="Delete Row", bg="#FF914D", fg="black", command=lambda: delete_data())
+delete_button.place(x=560, y=130)
 
 # Exitprogram Button
 Exitprogram = tk.Button(
-    window, text="Exit Program", bg="red", fg="black", command=lambda: update_data())
-Exitprogram.place(x=560, y=130)
+    window, text="Exit Program", bg="red", fg="black", command=exit)
+Exitprogram.place(x=550, y=170)
 
 # Function to handle submit button
 
@@ -94,7 +94,7 @@ def submit_data():
     global id_counter
 
     # Retrieve data from entry boxes
-    full_name = name_entry.get()
+    full_name = name_entry.get()    
     receipt_number = receipt_entry.get()
     item_hired = item_entry.get()
     num_items = num_item_entry.get()
@@ -148,6 +148,17 @@ def update_data():
     item_entry.insert(0, values[3])  # Item Hired
     num_item_entry.delete(0, tk.END)
     num_item_entry.insert(0, values[4])  # Number of Items Hired
+
+    # Remove the selected item from Treeview
+    trv.delete(selected_item)
+
+def delete_data():
+    # Get the selected item from Treeview
+    selected_item = trv.selection()
+
+    if not selected_item:
+        messagebox.showerror("Error", "Please select a row to delete.")
+        return
 
     # Remove the selected item from Treeview
     trv.delete(selected_item)
