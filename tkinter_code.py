@@ -16,7 +16,7 @@ window.minsize(640, 600)
 window.maxsize(640, 600)
 
 # giving the window a background color
-window.config(bg="grey")
+window.config(bg="#1E3556")
 
 # Defining Constants
 Max_num_of_items = 500
@@ -31,18 +31,16 @@ items_data = {}
 
 
 def create_label(text, row, column):
-    label = tk.Label(window, text=text, background="#38B6FF",
-                     font=("Arial", 10))
+    label = tk.Label(window, text=text, background="#1E3556", foreground="white", font=("Arial", 10))
     label.grid(row=row, column=column, sticky="e", padx=10, pady=10)
     return label
 
 # Function to create entry boxes
-
-
 def create_entry(row, column):
-    entry = tk.Entry(window, border=2, relief="solid", fg="#929090")
+    entry = tk.Entry(window, border=2, relief="solid", fg="white", bg="#262626")  # dark blue background
     entry.grid(row=row, column=column, sticky="w", padx=10, pady=10)
     return entry
+
 
 
 # Label and Entry for Full Name
@@ -63,20 +61,20 @@ num_item_entry = create_entry(3, 1)
 
 # Submit Button
 submit_button = tk.Button(
-    window, text="Submit", bg="green", fg="black", command=lambda: submit_data())
+    window, text="Submit", bg="#9400D3", fg="white", command=lambda: submit_data())  # purple background
 submit_button.place(x=320, y=90)
 
 # Update Button
 update_button = tk.Button(
-    window, text="Update", bg="yellow", fg="black", command=lambda: update_data())
+    window, text="Update", bg="#9400D3", fg="white", command=lambda: update_data())  # white background
 update_button.place(x=320, y=130)
 
-# delete Button
+# Delete Button
 delete_button = tk.Button(
-    window, text="Delete Row", bg="#FF914D", fg="black", command=lambda: delete_data())
+    window, text="Delete Row", bg="#9400D3", fg="white", command=lambda: delete_data())  # purple background
 delete_button.place(x=560, y=130)
 
-# Exitprogram Button
+# Exit program Button
 Exitprogram = tk.Button(
     window, text="Exit Program", bg="red", fg="black", command=exit)
 Exitprogram.place(x=550, y=170)
